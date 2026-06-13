@@ -224,7 +224,7 @@ Allegria has a name but no logo/colors/fonts yet. Proposed starting point (refin
 
 ## 8. SEO, performance, accessibility
 
-- **SEO:** unique per-locale `<title>`/meta description; Open Graph + Twitter card tags; `og-image.png` (1200×630, shipped); canonical URLs on `allegriadevelopment.gr`; `hreflang`; VitePress-generated `sitemap.xml`; sensible `robots.txt`.
+- **SEO:** unique per-locale `<title>`/meta description; Open Graph + Twitter card tags; `og-image.png` (1200×630, shipped); canonical URLs on `www.allegriadevelopment.gr` (apex 301s to www); `hreflang`; VitePress-generated `sitemap.xml`; sensible `robots.txt`.
 - **Performance targets:** Lighthouse ≥ 95 (Perf/SEO/Best-Practices/A11y). Self-hosted fonts with `font-display: swap`; preload critical font; lazy-mount/IO for below-fold; no render-blocking 3rd-party JS; hero animation budgeted to stay smooth on mobile.
 - **Accessibility:** WCAG 2.1 AA intent — semantic landmarks, keyboard-navigable nav + form, visible focus states, labelled form fields, color contrast checked against the palette, `prefers-reduced-motion` honored, decorative shapes `aria-hidden`.
 
@@ -252,7 +252,7 @@ Per interview, legal pages are **deferred**, but the contact form collects perso
 
 - **Netlify**, building the VitePress site to static output, served via CDN.
 - `netlify.toml`: build command (`pnpm build` / `vitepress build docs`), publish dir (`docs/.vitepress/dist`), Node version, and security headers.
-- **Domain:** point `allegriadevelopment.gr` DNS at Netlify (apex + `www` redirect), provision Netlify-managed TLS. Enforce HTTPS + HSTS.
+- **Domain:** `www.allegriadevelopment.gr` is the canonical/primary domain on Netlify; the apex `allegriadevelopment.gr` 301-redirects to www. DNS at Netlify, Netlify-managed TLS, HTTPS + HSTS enforced.
 - Auto-deploy on push to `main`; deploy previews on PRs.
 
 ---
