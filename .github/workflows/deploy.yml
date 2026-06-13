@@ -1,0 +1,67 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# One run per ref; newer pushes cancel in-flight ones
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      # Production deploy on push to main
+      - name: Deploy production
+        if: github.event_name == 'push'
+        run: |
+          npx --yes netlify-cli@26 deploy \
+            --dir docs/.vitepress/dist \
+            --prod \
+            --message "main@${GITHUB_SHA::7}"
+
+      # Deploy preview on pull requests (stable per-PR alias URL)
+      - name: Deploy preview
+        if: github.event_name == 'pull_request'
+        id: preview
+        run: |
+          npx --yes netlify-cli@26 deploy \
+            --dir docs/.vitepress/dist \
+            --alias "deploy-preview-${{ github.event.number }}" \
+            --message "PR #${{ github.event.number }} (${GITHUB_SHA::7})" \
+            --json > deploy.json
+          echo "url=$(node -p "require('./deploy.json').deploy_url")" >> "$GITHUB_OUTPUT"
+
+      - name: Comment preview URL
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BODY="🚀 **Deploy preview ready** — ${{ steps.preview.outputs.url }}
+          _(updates on every push to this PR)_"
+          gh pr comment ${{ github.event.number }} --edit-last --body "$BODY" \
+            || gh pr comment ${{ github.event.number }} --body "$BODY"

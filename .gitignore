@@ -5,3 +5,6 @@ docs/.vitepress/cache/
 *.local
 .env
 .env.*
+
+# Local Netlify folder
+.netlify
