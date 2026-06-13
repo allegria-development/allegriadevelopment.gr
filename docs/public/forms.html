@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Allegria — form detection</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <!--
+      Static copy of the contact form so Netlify's build-time bot registers it.
+      The live form is rendered by Vue (ContactForm.vue) with the same name + fields.
+    -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="company" />
+      <input type="text" name="projectType" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+  </body>
+</html>
