@@ -38,9 +38,10 @@ export default defineConfig({
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     // Keep scroll-reveal content visible when JS is disabled.
     ['noscript', {}, '<style>.reveal{opacity:1!important;transform:none!important}</style>'],
-    // Cookieless analytics (GDPR-friendly, no consent banner). Uncomment and set
-    // the real domain/src once a Plausible or Umami account exists:
-    // ['script', { defer: '', 'data-domain': 'allegriadevelopment.gr', src: 'https://plausible.io/js/script.js' }],
+    // Cookieless analytics — Plausible (GDPR-friendly, no consent banner).
+    // Collects data once "allegriadevelopment.gr" is added in your Plausible
+    // dashboard. To use Umami instead, swap for its script + data-website-id.
+    ['script', { defer: '', 'data-domain': 'allegriadevelopment.gr', src: 'https://plausible.io/js/script.js' }],
   ],
 
   transformHead({ pageData, siteData }) {
