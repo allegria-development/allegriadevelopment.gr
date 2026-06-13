@@ -1,0 +1,29 @@
+:root {
+  /* Brand palette — teal primary + warm "joy" secondary */
+  --accent: #0d9488;
+  --accent-strong: #0f766e;
+  --accent-soft: #14b8a6;
+  --accent-tint: #ccfbf1;
+  --joy: #f59e0b;
+  --joy-tint: #fef3c7;
+
+  /* Ink & surfaces */
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #e2e8f0;
+  --bg: #ffffff;
+  --bg-soft: #f8fafc;
+
+  /* Type */
+  --font-head: 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Layout */
+  --maxw: 1120px;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 10px 30px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 2px 6px rgba(15, 23, 42, 0.06), 0 18px 44px rgba(15, 23, 42, 0.1);
+  --nav-h: 68px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
