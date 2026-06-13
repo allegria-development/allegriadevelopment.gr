@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress'
 
-const HOSTNAME = 'https://allegriadevelopment.gr'
+const HOSTNAME = 'https://www.allegriadevelopment.gr'
 
 export default defineConfig({
   cleanUrls: true,

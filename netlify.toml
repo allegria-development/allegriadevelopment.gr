@@ -5,10 +5,10 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Redirect www -> apex
+# Redirect apex -> www (www is the canonical/primary domain)
 [[redirects]]
-  from = "https://www.allegriadevelopment.gr/*"
-  to = "https://allegriadevelopment.gr/:splat"
+  from = "https://allegriadevelopment.gr/*"
+  to = "https://www.allegriadevelopment.gr/:splat"
   status = 301
   force = true
 
